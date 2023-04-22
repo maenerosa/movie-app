@@ -1,35 +1,10 @@
 import "./style.css";
+import fetchCurrentWeather from "./src/fetchCurrentWeather";
+import appendWeather from "./src/appendWeather";
 
-async function fetchCurrentWeather(city) {
-  const API_KEY = "1c48058701c0201afd110d1d061a82ea";
-  const CURRENT_WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+fetchCurrentWeather("Manila").then((data) => appendWeather(data));
 
-  const response = await fetch(CURRENT_WEATHER_API);
-  const weatherData = await response.json();
-
-  return weatherData;
-}
-
-function init(weatherData) {
-  const app = document.getElementById("app");
-
-  const h1 = document.createElement("h1");
-  h1.textContent = `Right now in ${weatherData.name}, it's ${weatherData.weather[0].description}.`;
-
-  const main = document.createElement("main");
-  const weatherIcon = document;
-
-  const iconContainer = document.createElement("div");
-  const tempContainer = document.createElement("div");
-  const detailsContainer = document.createElement("div");
-
-  main.append(iconContainer, tempContainer, detailsContainer);
-  app.append(h1, main);
-}
-
-fetchCurrentWeather("Manila").then((data) => init(data));
-
-// -----------------------------------------------------
+//--------------------------------
 
 // function fetchData() {
 //   return new Promise((resolve, reject) => {
