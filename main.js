@@ -1,26 +1,33 @@
 import "./style.css";
 
-async function fetchQuote() {
-  try {
-    const response = await fetch("https://api.quotable.io/quotes/random");
-    const data = await response.json();
-    //success
+async function fetchCurrentWeather(city) {
+  const API_KEY = "1c48058701c0201afd110d1d061a82ea";
+  const CURRENT_WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
 
-    return data;
-  } catch (error) {
-    throw new Error(error);
-  }
-  //rejected
+  const response = await fetch(CURRENT_WEATHER_API);
+  const weatherData = await response.json();
+
+  return weatherData;
 }
 
-fetchQuote()
-  .then((data) => {
-    document.body.innerHTML = `
-    <h1>${data[0].author}</h1> 
-    <p>${data[0].content}</p>`;
-  }) //successful
+function init(weatherData) {
+  const app = document.getElementById("app");
 
-  .catch((error) => console.error(error)); //rejected
+  const h1 = document.createElement("h1");
+  h1.textContent = `Right now in ${weatherData.name}, it's ${weatherData.weather[0].description}.`;
+
+  const main = document.createElement("main");
+  const weatherIcon = document;
+
+  const iconContainer = document.createElement("div");
+  const tempContainer = document.createElement("div");
+  const detailsContainer = document.createElement("div");
+
+  main.append(iconContainer, tempContainer, detailsContainer);
+  app.append(h1, main);
+}
+
+fetchCurrentWeather("Manila").then((data) => init(data));
 
 // -----------------------------------------------------
 
