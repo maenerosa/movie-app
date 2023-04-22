@@ -2,6 +2,7 @@ import kelvinToCelsius from "./utils/kelvinToCelsius";
 
 export default function appendWeather(weatherData) {
   const app = document.getElementById("app");
+  app.innerHTML = "";
 
   const h1 = document.createElement("h1");
   h1.textContent = `Right now in ${weatherData.name}, it's ${weatherData.weather[0].description}.`;
@@ -20,6 +21,6 @@ export default function appendWeather(weatherData) {
 
   iconContainer.appendChild(weatherIcon);
   tempContainer.appendChild(temp);
-  main.append(iconContainer, tempContainer, detailsContainer);
-  app.append(h1, main);
+  main.append(h1, iconContainer, tempContainer, detailsContainer);
+  app.append(main);
 }
