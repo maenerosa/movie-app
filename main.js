@@ -4,11 +4,13 @@ async function fetchQuote() {
   try {
     const response = await fetch("https://api.quotable.io/quotes/random");
     const data = await response.json();
+    //success
 
     return data;
   } catch (error) {
     throw new Error(error);
   }
+  //rejected
 }
 
 fetchQuote()
@@ -16,8 +18,9 @@ fetchQuote()
     document.body.innerHTML = `
     <h1>${data[0].author}</h1> 
     <p>${data[0].content}</p>`;
-  })
-  .catch((error) => console.error(error));
+  }) //successful
+
+  .catch((error) => console.error(error)); //rejected
 
 // -----------------------------------------------------
 
