@@ -2,7 +2,6 @@ import kelvinToCelsius from "./utils/kelvinToCelsius";
 
 export default function appendWeather(weatherData) {
   const app = document.getElementById("app");
-  app.innerHTML = "";
 
   const h1 = document.createElement("h1");
   h1.textContent = `Right now in ${weatherData.name}, it's ${weatherData.weather[0].description}.`;

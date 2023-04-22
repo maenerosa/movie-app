@@ -13,7 +13,8 @@ searchWeatherBtn.addEventListener("click", (event) => {
 
   fetchCurrentWeather(input).then((data) => appendWeather(data));
 });
-//--------------------------------
+
+///---------------------------------------------------------
 
 // function fetchData() {
 //   return new Promise((resolve, reject) => {
