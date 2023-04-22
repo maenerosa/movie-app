@@ -2,8 +2,16 @@ import "./style.css";
 import fetchCurrentWeather from "./src/fetchCurrentWeather";
 import appendWeather from "./src/appendWeather";
 
-fetchCurrentWeather("Manila").then((data) => appendWeather(data));
+const searchWeatherBtn = document.getElementById("search-weather-btn");
+const searchWeatherInput = document.getElementById("search-weather-input");
 
+searchWeatherBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const input = searchWeatherInput.value;
+
+  if (input === "") return;
+});
 //--------------------------------
 
 // function fetchData() {
