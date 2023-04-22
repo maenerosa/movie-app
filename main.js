@@ -1,29 +1,68 @@
 import "./style.css";
 
-const jsonMovieData =
-  '{"title": "My Favorite Movies","movies": [{"title": "The Shawshank Redemption","year": 1994,"director": "Frank Darabont"},{"title": "The Godfather","year": 1972,"director": "Francis Ford Coppola"},{"title": "The Dark Knight","year": 2008,"director": "Christopher Nolan"}]}';
+async function fetchQuote() {
+  try {
+    const response = await fetch("https://api.quotable.io/quotes/random");
+    const data = await response.json();
 
-const movieData = JSON.parse(jsonMovieData);
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
-const title = document.createElement("h1");
-title.textContent = movieData.title;
+fetchQuote()
+  .then((data) => {
+    document.body.innerHTML = `
+    <h1>${data[0].author}</h1> 
+    <p>${data[0].content}</p>`;
+  })
+  .catch((error) => console.error(error));
 
-const app = document.getElementById("app");
-app.appendChild(title);
+// -----------------------------------------------------
 
-movieData.movies.forEach((movie) => {
-  const movieContainer = document.createElement("div");
-  movieContainer.classList.add("movie-container");
+// function fetchData() {
+//   return new Promise((resolve, reject) => {
+//     fetch("https://jsonplaceholder.typicode.com/posts/1")
+//       .then((response) => response.json())
+//       .then((data) => resolve(data))
+//       .catch((error) => reject(error));
+//   });
+// }
 
-  const h2 = document.createElement("h2");
-  h2.textContent = movie.title;
+// function append(data) {
+//   document.body.innerHTML = `
+//   <h1>${data.title}</h1>
+//   <p>${data.body}</p>`;
+// }
 
-  const h3 = document.createElement("h3");
-  h3.textContent = movie.year;
+// fetchData()
+//   .then((data) => append(data))
+//   .catch((error) => console.error(error));
+/* 
+  Create a function that returns a new Promise
+  function fetchData() {
+    return new Promise((resolve, reject) => {});
+  }
+**/
 
-  const p = document.createElement("p");
-  p.textContent = movie.director;
+/* 
+  Inside the Promise object, use the fetch API to get the data
+  function fetchData() {
+    return new Promise((resolve, reject) => {
+      fetch("https://jsonplaceholder.typicode.com/posts/1")
+    });
+  }
+**/
 
-  movieContainer.append(h2, h3, p);
-  app.appendChild(movieContainer);
-});
+/* 
+  The fetch API is also a Promise so we can catch if its a success/error
+  function fetchData() {
+    return new Promise((resolve, reject) => {
+      fetch("https://jsonplaceholder.typicode.com/posts/1")
+        .then((response) => response.json())
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
+    });
+  }
+**/
