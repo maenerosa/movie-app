@@ -2,10 +2,10 @@ import "./style.css";
 import fetchCurrentWeather from "./src/fetchCurrentWeather";
 import appendWeather from "./src/appendWeather";
 
-const searchWeatherBtn = document.getElementById("search-weather-btn");
+const formWeather = document.getElementById("form-weather");
 const searchWeatherInput = document.getElementById("search-weather-input");
 
-searchWeatherBtn.addEventListener("click", (event) => {
+formWeather.addEventListener("submit", (event) => {
   event.preventDefault();
   const input = searchWeatherInput.value;
 
